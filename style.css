@@ -103,7 +103,6 @@ body {
     animation: heartBeat 2s linear infinite;
 } */
 
-
 .top__buttons .suffle-btn:active,
 .top__buttons .heart-btn:active {
     transform: scale(1.1);
