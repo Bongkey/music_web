@@ -1,0 +1,363 @@
+:root {
+    --font-xlarge: 20px;
+    --font-large: 16px;
+    --font-normal: 12px;
+    --font-small: 9px;
+    --grey: rgba(0, 0, 0, .5);
+}
+
+* {
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    background-color: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.list-screen,
+.main-screen {
+    width: 275px;
+    height: 600px;
+    background-color: white;
+    border-radius: 30px;
+    padding: 30px 20px;
+}
+
+.list-screen {
+    margin-right: 80px;
+}
+
+.main-screen header,
+.list-screen header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.artist {
+    width: 100%;
+    text-align: center;
+}
+
+.artist>img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 15px 0px;
+    box-shadow: 0px 3px 20px 2px #ffb8b8;
+}
+
+.artist .artist__text h1 {
+    font-size: var(--font-xlarge);
+    font-weight: 900;
+    margin: 10px 0px;
+}
+
+.artist .artist__text p {
+    font-size: var(--font-normal);
+    color: var(--grey);
+    font-weight: 600;
+}
+
+.top__buttons {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0px;
+
+}
+
+.top__buttons .suffle-btn,
+.top__buttons .heart-btn {
+    width: 90px;
+    height: 30px;
+    border: 0px;
+    outline: 0;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+
+@keyframes heartBeat {
+    0% {
+        color: #fff;
+        transform: none;
+    }
+
+    50% {
+        color: tomato;
+        transform: scale(1.1);
+    }
+
+    100% {
+        color: #fff;
+        transform: none;
+    }
+}
+
+/* .top__buttons .heart-btn .heart {
+    animation: heartBeat 2s linear infinite;
+} */
+
+
+.top__buttons .suffle-btn:active,
+.top__buttons .heart-btn:active {
+    transform: scale(1.1);
+}
+
+.top__buttons .suffle-btn {
+    background-color: #000;
+    box-shadow: 0px 1px 1px 1px var(--grey);
+    color: #fff;
+    margin-right: 10px;
+    font-size: var(--font-normal);
+}
+
+.top__buttons .heart-btn {
+    background-color: #fff;
+    box-shadow: 0px 1px 1px 1px var(--grey);
+}
+
+.song__list {
+    width: 100%;
+}
+
+.song__list .song {
+    padding: 15px;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.song__list .selected-song {
+    position: relative;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .15);
+}
+
+.playing__divs {
+    position: absolute;
+    display: flex;
+    width: 30px;
+    height: 30px;
+    top: 20px;
+    left: 20px;
+}
+
+@keyframes playingMusic {
+    0% {
+        transform: scaleY(1);
+    }
+
+    50% {
+        transform: scaleY(1.2);
+    }
+
+    75% {
+        transform: scaleY(2);
+    }
+
+    100% {
+        transform: scaleY(1.2);
+    }
+}
+
+.playing__divs div {
+    margin-right: 3px;
+    width: 5px;
+    height: 10px;
+    background-color: #fff;
+    animation: playingMusic 900ms linear infinite;
+}
+
+.playing__divs div:nth-child(2) {
+    animation-delay: 100ms;
+}
+
+.playing__divs div:nth-child(3) {
+    animation-delay: 200ms;
+}
+
+
+.song__list .song img {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.song__list .song .song__text {
+    width: 100%;
+    position: relative;
+    top: 2.5px;
+    right: -10px;
+    text-align: start;
+}
+
+.song__list .song .song__text p {
+    font-size: var(--font-small);
+    color: var(--grey);
+}
+
+.song__list .song .song__text span {
+    font-size: var(--font-normal);
+    font-weight: 600;
+}
+
+.song__list .song i {
+    color: var(--grey);
+}
+
+.play__form {
+    width: 100%;
+    height: 50px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+}
+
+.play__form .play__text {
+    margin-left: 5px;
+}
+
+.play__form .play__text p {
+    font-size: var(--font-small);
+    text-align: start;
+    color: grey;
+}
+
+.play__form .play__text span {
+    font-size: var(--font-normal);
+    text-align: start;
+    font-weight: 600;
+}
+
+.play__form .play__buttons {
+    width: 35%;
+    margin-right: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.play__form .play__buttons i {
+    cursor: pointer;
+}
+
+.play__form .play__buttons i:first-child,
+.play__form .play__buttons i:last-child {
+    font-size: var(--font-small);
+}
+
+.main-screen .cover {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.main-screen .cover img {
+    margin: 50px 0px;
+    width: 200px;
+    height: 200px;
+    border-radius: 15px;
+    box-shadow: 0px 10px 20px 0px #e4ccff;
+}
+
+.main-screen .song__text {
+    width: 100%;
+    text-align: center;
+}
+
+.main-screen .song__text h1 {
+    font-size: var(--font-xlarge);
+    font-weight: 900;
+    margin: 10px 0px;
+}
+
+.main-screen .song__text p {
+    font-size: var(--font-normal);
+    color: var(--grey);
+    font-weight: 600;
+}
+
+.main-screen .play__range {
+    position: relative;
+    margin: 40px 0px;
+    display: flex;
+    justify-content: center;
+}
+
+.main-screen .play__range input[type=range] {
+    width: 220px;
+    height: 8px;
+    -webkit-appearance: none;
+    background: rgba(0, 0, 0, .07);
+    outline: none;
+    overflow: hidden;
+}
+
+.main-screen .play__range input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background: #000;
+    cursor: pointer;
+    height: 10px;
+    width: 10px;
+    box-shadow: -200px 0 0 200px rgba(0, 0, 0, .5);
+}
+
+.main-screen .play__range p {
+    position: absolute;
+    font-size: var(--font-small);
+    color: var(--grey);
+}
+
+.main-screen .play__range p:first-child {
+    top: -12px;
+    left: 10px;
+}
+
+.main-screen .play__range p:last-child {
+    top: -12px;
+    right: 10px;
+}
+
+.main-screen .play__buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-screen .play__buttons i:nth-child(odd) {
+    color: var(--grey);
+}
+
+.main-screen .play__buttons i:nth-child(2n) {
+    color: black;
+}
+
+.main-screen .play__buttons .focusing {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.main-screen .play__buttons .focusing i {
+    position: absolute;
+    right: 17px;
+    color: #fff;
+}
