@@ -133,6 +133,7 @@ function iconHandler(event) {
     const name = event.target.className;
     const currentTitle = playTitle.innerText;
     let songIdx = searchSongIndex(currentTitle);
+    
     if (name === "fas fa-step-backward") {
         songIdx--;
     } else if (name === "fas fa-step-forward") {

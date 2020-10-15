@@ -365,3 +365,15 @@ body {
     right: 17px;
     color: #fff;
 }
+
+@media (max-width: 500px) {
+    body {
+        flex-direction: column;
+    }
+
+    .list-screen {
+        margin-right: 0;
+        margin-top: 400px;
+        margin-bottom: 20px;
+    }
+}
