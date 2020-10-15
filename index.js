@@ -8,8 +8,10 @@ const albumImg = document.querySelector('.main-screen .cover img');
 const playTitle = document.querySelector('.list-screen .play__text span');
 const mainTitle = document.querySelector('.main-screen .song__text h1');
 const playIcons = document.querySelectorAll('.fa-play');
+
 const songTitles = ['EIGHT', 'Blueming', 'BBIBBI', 'Palette'];
 const fileTitles = ['eight', 'blueming', 'bbibbi', 'palette'];
+
 let preMusic = "";
 
 const HEART_ANIMATION = "heartBeat 2s linear infinite";
@@ -31,29 +33,42 @@ function songHandler(event) {
     const songTitle = event.currentTarget.querySelector('span').innerText;
     const songIndex = searchSongIndex(songTitle);
     const music = new Audio('audio/' + fileTitles[songIndex]+'.mp3');
+
     albumImg.src = ('img/'+ fileTitles[songIndex]+'.jpg');
     playTitle.innerText = songTitles[songIndex];
     mainTitle.innerText = songTitles[songIndex];
 
     const otherSong = document.querySelector('.selected-song');
 
-    if (preMusic.src === music.src) {
-        preMusic.pause();
-        music.pause();
-    } else if (preMusic === "") {
-        music.play();
-    } else if (preMusic !== music) {
-        preMusic.pause();
-        music.play();
-    }
+    musicPlayAndPause(music);
 
-    preMusic = music;
     // 다른 .song 클릭시
     if (otherSong && otherSong !== event.currentTarget) {
         otherSong.classList.toggle('selected-song');
     }
     // //currentTarget -> 상위 요소
     event.currentTarget.classList.toggle('selected-song');
+}
+
+function musicPlayAndPause(music) {
+    if (preMusic.src === music.src) {
+        preMusic.pause();
+        music.pause();
+        if(preMusic === ""){
+            music.play();
+        } else {
+            preMusic="";
+        }
+        playIconsToggle(true);
+    } else if (preMusic === "") {
+        music.play();
+        preMusic = music;
+    } else if (preMusic !== music) {
+        if(preMusic)
+        preMusic.pause();
+        music.play();
+        preMusic = music;
+    }
 }
 
 function searchSongIndex(songTitle) {

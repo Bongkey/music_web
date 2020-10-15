@@ -255,7 +255,7 @@ body {
 
 .play__form .play__buttons i:first-child,
 .play__form .play__buttons i:last-child {
-    font-size: var(--font-small);
+    font-size: var(--font-normal);
 }
 
 .main-screen .cover {
