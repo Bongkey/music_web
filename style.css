@@ -355,7 +355,12 @@ body {
     border-radius: 50%;
 }
 
+.main-screen .play__buttons i {
+    cursor: pointer;
+}
+
 .main-screen .play__buttons .focusing i {
+
     position: absolute;
     right: 17px;
     color: #fff;

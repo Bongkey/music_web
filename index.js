@@ -8,20 +8,42 @@ const albumImg = document.querySelector('.main-screen .cover img');
 const playTitle = document.querySelector('.list-screen .play__text span');
 const mainTitle = document.querySelector('.main-screen .song__text h1');
 const playIcons = document.querySelectorAll('.fa-play');
+const preSongIcons = document.querySelectorAll('.fa-step-backward');
+const nextSongIcons = document.querySelectorAll('.fa-step-forward');
 
 const songTitles = ['EIGHT', 'Blueming', 'BBIBBI', 'Palette'];
 const fileTitles = ['eight', 'blueming', 'bbibbi', 'palette'];
+const HEART_ANIMATION = "heartBeat 2s linear infinite";
 
 let preMusic = "";
 
-const HEART_ANIMATION = "heartBeat 2s linear infinite";
-heart.style.animation = HEART_ANIMATION;
 
-heartBtn.addEventListener("click", heartBtnHandler);
-songs.forEach(song => {
-    song.addEventListener("click", songHandler);
-});
-timeRange.addEventListener("input", rangeHandler);
+init();
+
+
+function init() {
+    heart.style.animation = HEART_ANIMATION;
+
+    heartBtn.addEventListener("click", heartBtnHandler);
+
+    songs.forEach(song => {
+        song.addEventListener("click", songHandler);
+    });
+
+    timeRange.addEventListener("input", rangeHandler);
+
+    playIcons.forEach(icon => {
+        icon.addEventListener("click", iconHandler);
+    });
+
+    nextSongIcons.forEach(icon => {
+        icon.addEventListener("click", iconHandler);
+    })
+
+    preSongIcons.forEach(icon => {
+        icon.addEventListener("click", iconHandler);
+    })
+}
 
 function heartBtnHandler() {
     heart.style.animation = heart.style.animation ? "" : HEART_ANIMATION;
@@ -32,9 +54,8 @@ function heartBtnHandler() {
 function songHandler(event) {
     const songTitle = event.currentTarget.querySelector('span').innerText;
     const songIndex = searchSongIndex(songTitle);
-    const music = new Audio('audio/' + fileTitles[songIndex]+'.mp3');
-
-    albumImg.src = ('img/'+ fileTitles[songIndex]+'.jpg');
+    const music = new Audio('audio/' + fileTitles[songIndex] + '.mp3');
+    albumImg.src = ('img/' + fileTitles[songIndex] + '.jpg');
     playTitle.innerText = songTitles[songIndex];
     mainTitle.innerText = songTitles[songIndex];
 
@@ -53,19 +74,18 @@ function songHandler(event) {
 function musicPlayAndPause(music) {
     if (preMusic.src === music.src) {
         preMusic.pause();
-        music.pause();
-        if(preMusic === ""){
-            music.play();
+        if (preMusic === "") {
+            preMusic.play();
         } else {
-            preMusic="";
+            preMusic = "";
         }
         playIconsToggle(true);
     } else if (preMusic === "") {
         music.play();
         preMusic = music;
     } else if (preMusic !== music) {
-        if(preMusic)
-        preMusic.pause();
+        if (preMusic)
+            preMusic.pause();
         music.play();
         preMusic = music;
     }
@@ -99,12 +119,31 @@ setInterval(function () {
     }
 }, 500);
 
-function rangeHandler (event) {
+function rangeHandler(event) {
     preMusic.currentTime = event.target.value;
 }
 
-function playIconsToggle (musicState) {
+function playIconsToggle(musicState) {
     playIcons.forEach(icon => {
         icon.className = musicState ? "fas fa-play" : "fas fa-pause";
     })
+}
+
+function iconHandler(event) {
+    const name = event.target.className;
+    const currentTitle = playTitle.innerText;
+    let songIdx = searchSongIndex(currentTitle);
+    if (name === "fas fa-step-backward") {
+        songIdx--;
+    } else if (name === "fas fa-step-forward") {
+        songIdx++;
+    }
+
+    if (songIdx === songs.length || currentTitle === "Not Provided") {
+        songIdx = 0;
+    } else if (songIdx === -1 || currentTitle === "Not Provided") {
+        songIdx = 3;
+    }
+
+    songs[songIdx].click();
 }
